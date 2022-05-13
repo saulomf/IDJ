@@ -3,7 +3,6 @@
 
 using namespace std;
 
-//Implementacoes de Game
 Game* Game::instance = nullptr;
 
 Game& Game::GetInstance(){
@@ -18,7 +17,6 @@ Game::Game(string title, int width, int height){
     if(instance == nullptr) instance = this;
 
     if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) !=0 ){
-        //SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         cout << "Erro " << SDL_GetError() << endl;
         abort();
     }
@@ -37,7 +35,6 @@ Game::Game(string title, int width, int height){
 
     window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,  0);
     if (window == nullptr) {
-        //printf("Could not create window: %s\n", SDL_GetError());
         cout << "Erro " << SDL_GetError() << endl;
         abort();
     }
@@ -45,7 +42,6 @@ Game::Game(string title, int width, int height){
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     if (renderer == nullptr) {
-        //printf("Could not create window: %s\n", SDL_GetError());
         cout << "Erro " << SDL_GetError() << endl;
         abort();
     }

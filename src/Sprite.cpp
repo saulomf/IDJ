@@ -2,25 +2,26 @@
 
 #include <iostream>
 
-Sprite::Sprite(){
+using namespace std;
+
+Sprite::Sprite(GameObject& associated) : Component(associated){
     texture = nullptr;
 }
 
-Sprite::Sprite(string file){
+Sprite::Sprite(string file, GameObject& associated) : Component(associated){
     texture = nullptr;
     Open(file);
 }
 
 Sprite::~Sprite(){
-    SDL_DestroyTexture(texture);
+    if(IsOpen()) SDL_DestroyTexture(texture);
 }
 
 void Sprite::Open(string file){
-    if(texture != nullptr) SDL_DestroyTexture(texture);
+    if(IsOpen()) SDL_DestroyTexture(texture);
     texture = nullptr;
     texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), file.c_str());
     if(texture == nullptr){
-        //SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         cout << "erro " << SDL_GetError() << endl;
     }
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
@@ -34,10 +35,10 @@ void Sprite::SetClip(int x, int y, int w, int h){
     clipRect.h = h;
 }
 
-void Sprite::Render(int x, int y){
+void Sprite::Render(){
     SDL_Rect dstrect;
-    dstrect.x = x;
-    dstrect.y = y;
+    dstrect.x = associated.box.x;
+    dstrect.y = associated.box.y;
     dstrect.w = clipRect.w;
     dstrect.h = clipRect.h;
     SDL_RenderCopy(Game::GetInstance().GetRenderer(), texture, &clipRect, &dstrect);
@@ -53,5 +54,14 @@ int Sprite::GetHeight(){
 
 bool Sprite::IsOpen(){
     if (texture != nullptr) return true;
+    return false;
+}
+
+void Sprite::Update(float dt){
+
+}
+
+bool Sprite::Is(string type){
+    if(type == "Sprite") return true;
     return false;
 }
