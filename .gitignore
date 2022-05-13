@@ -1,4 +1,4 @@
-./bin
-./dep
+bin/
+dep/
 *.exe
 *.dll
