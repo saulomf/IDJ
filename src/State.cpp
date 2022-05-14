@@ -1,6 +1,7 @@
 #include "../include/Game.h"
 #include "../include/Sound.h"
 #include "../include/Face.h"
+#include <iostream>
 
 State::State(){
     quitRequested = false;
@@ -28,7 +29,7 @@ void State::Input(){
 
 				if(go->box.isIn( Vec2((float) mouseX, (float) mouseY) )) {
 					Face* face = (Face*) go->GetComponent( "Face" );
-					if ( nullptr != face && !go->IsDead()) {
+					if ( nullptr != face ) {
 						face->Damage(rand() % 10 + 10);
 						break;
 					}
@@ -72,13 +73,20 @@ void State::LoadAssets(){
 }
 
 void State::Update(float dt){
-    if(SDL_QuitRequested()){
-        quitRequested = true;
+    Input();
+    for(unsigned int i=0; i<objectArray.size(); i++) {
+        objectArray[i]->Update(dt);
+    }
+
+    for(unsigned int i=0; i<objectArray.size(); i++) {
+        if(objectArray[i]->IsDead()) {
+            objectArray.erase(objectArray.begin() + i);
+        }
     }
 }
 
 void State::Render(){
-    for(int i = 0; i < objectArray.size(); i++){
+    for(unsigned int i = 0; i < objectArray.size(); i++){
         objectArray[i].get()->Render();
     }
 }

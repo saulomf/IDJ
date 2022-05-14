@@ -9,8 +9,8 @@ class Vec2 {
         Vec2();
         Vec2(float x, float y);
 
-        Vec2 opPlus (const Vec2& point);
-        Vec2 opMinus (const Vec2& point);
+        void opPlus (const Vec2& point);
+        void opMinus (const Vec2& point);
         friend Vec2 opMul (float value, const Vec2& point);
         friend Vec2 opMul (const Vec2& point, float value);
         bool opEq (const Vec2& point);

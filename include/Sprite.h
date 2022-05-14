@@ -19,7 +19,7 @@ class Sprite : public Component {
 
     public:
         Sprite(GameObject& associated);
-        explicity Sprite(string file, GameObject& associated);
+        Sprite(string file, GameObject& associated);
         ~Sprite();
         void Open(string file);
         void SetClip(int x, int y, int w, int h);

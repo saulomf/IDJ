@@ -26,6 +26,8 @@ void Sprite::Open(string file){
     }
     SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     SetClip(0, 0, width, height);
+    associated.box.h = height;
+    associated.box.w = width;
 }
 
 void Sprite::SetClip(int x, int y, int w, int h){

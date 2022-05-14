@@ -18,7 +18,7 @@ Sound::~Sound(){
 void Sound::Play(int times){
     channel = Mix_PlayChannel(-1, chunk, times);
     if(channel == -1) {
-        cout << "Erro " << SDL_GetError() << endl;
+        cout << "Erro 2222 " << SDL_GetError() << endl;
         abort();
     }
 }
@@ -30,8 +30,8 @@ void Sound::Stop(){
 
 void Sound::Open(string file){
     chunk = Mix_LoadWAV(file.c_str());
-    if(IsOpen()){
-        cout << "Erro " << SDL_GetError() << endl;
+    if(!IsOpen()){
+        cout << "Erro 3333 " << SDL_GetError() << endl;
         abort();
     }
 } 

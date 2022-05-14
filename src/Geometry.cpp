@@ -1,7 +1,6 @@
 #include <cmath>
 #include "../include/Geometry.h"
 
-
 ////////////////////////// Implementacoes de vec2
 
 Vec2::Vec2() {
@@ -15,19 +14,15 @@ Vec2::Vec2(float x, float y) {
 }
 
 //soma de vetores
-Vec2 Vec2::opPlus (const Vec2& point) {
-    return Vec2(
-        x + point.x,
-        y + point.y
-    );
+void Vec2::opPlus(const Vec2& point) {
+    x = x + point.x;
+    y = y + point.y;
 }
 
 //subtracao de vetores
-Vec2 Vec2::opMinus (const Vec2& point) {
-    return Vec2(
-        x - point.x,
-        y - point.y
-    );
+void Vec2::opMinus (const Vec2& point) {
+    x = x - point.x;
+    y = y - point.y;
 }
 
 //produto escalar
@@ -143,6 +138,5 @@ float Rect::getDistance(const Rect& to) {
 
 //Funcao para checar se o ponto esta na area
 bool Rect::isIn(const Vec2& point) {
-    return (point.x >= x) && (point.y >= y)
-        && (point.x <= x + w) && (point.y <= y + h);
+    return (point.x >= x) && (point.y >= y) && (point.x <= x + w) && (point.y <= y + h);
 }
